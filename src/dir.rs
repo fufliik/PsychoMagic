@@ -13,17 +13,18 @@ pub fn launcher() -> io::Result<PathBuf> {
     Ok(launcher_dir)
 }
 
-pub fn config() -> io::Result<PathBuf> {
-    let cfg = launcher()?.join("config.json");
-
+pub fn user() -> io::Result<PathBuf> {
+    let cfg = launcher()?.join("user.json");
     if !cfg.exists() {
         fs::File::create(&cfg)?;
     }
-
     Ok(cfg)
 }
 
-
-
-
-// не подключён 
+pub fn settings() -> io::Result<PathBuf> {
+    let cfg = launcher()?.join("settings.json");
+    if !cfg.exists() {
+        fs::File::create(&cfg)?;
+    }
+    Ok(cfg)
+}

@@ -10,7 +10,7 @@ pub struct App {
 }
 pub enum PlayStatus{
     Play,
-    Game,
+    Starting,
     Update,
 }
 
@@ -21,7 +21,7 @@ impl PlayStatus{
                 "Играть",
                 slint::Color::from_rgb_u8(35, 134, 54),
             ),
-            PlayStatus::Game => (
+            PlayStatus::Starting => (
                 "Запуск..",
                 slint::Color::from_rgb_u8(255, 99, 99),
             ),
@@ -85,6 +85,7 @@ impl App {
         });
     }
 
+
     pub fn emitter_console_minecraft(ui_weak: Weak<MainWindow>, text: String ) {
         let _ =  slint::invoke_from_event_loop( move || {
             if let Some(ui) = ui_weak.upgrade() {
@@ -108,6 +109,7 @@ impl App {
         });
     }
 
+
 //global Enabled
 
     pub fn minecraft_run(&self) {
@@ -126,7 +128,7 @@ impl App {
 
                 if let Err(err) = result {
                     eprintln!("minecraft error: {err}");                              // в логи
-                    Self::emitter_mdp_minecraft(ui_weak.clone(), format!("Ошибка: {err}")); // в хотбар
+                    Self::emitter_mdp_minecraft(ui_weak.clone(), format!("Ошибка: {err}")); // в хотбар скрыт текст выводит но не показывает
                 }
 
                 Self::play_status(ui_weak, PlayStatus::Play, true);

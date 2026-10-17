@@ -23,28 +23,24 @@ export component Settings  inherits Rectangle{
     }
 
     Rectangle {
-        x:580px; y:40px;
-        width: 100px;
-        height: 40px;
-        background: Color.background;
-        border-radius: 20px;
+        x: parent.width - self.width - 30px;
+        y: 30px;
+        width: 20px;
+        height: 20px;
         clip: true;
-
-
-        Text{
-            text:"Назад";
-            font-size: 14px;
-            font-family: "Inter";
-            font-weight: FontWeight.bold;
-        }
-
-        Button{
-            width: 100%;
-            height: 100%;
+        TouchArea {
+            width: parent.width;
+            height: parent.height;
             enabled: Enabled.all_settings_button;
             clicked => {
                 Enabled.all_settings_button = false;
                 Enabled.global_button = true;
+                debug("settings exit")
+            }
+            Image {
+                source: @image-url("image/exit.png");
+                width: 100%;
+                height: 100%;
             }
         }
     }

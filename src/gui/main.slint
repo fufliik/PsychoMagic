@@ -30,12 +30,29 @@ export component MainWindow inherits Window{
         source: @image-url("image/bg.jpg");
      }
 
-     Text {
-        x:100px; y:240px;
-        text: "TERA CREATE";
-        color: #ffffff;
-        font-size: 40pt;
-        font-weight: FontWeight.extra-bold;
+     Rectangle {
+         z:1;
+         Text {
+             x: 160px;
+             y: 60px;
+             text:"На сервере";
+             color: Color.qwer;
+             font-size: 10pt;
+             }
+         Text {
+             x: 160px;
+             y: 82px;
+             text: Logic.server_online;
+             color: Color.primary;
+             font-size: 10pt;
+             }
+         Text {
+             x:100px; y:240px;
+             text: "TERA CREATE";
+             color: #ffffff;
+             font-size: 40pt;
+             font-weight: FontWeight.extra-bold;
+         }
      }
 //ИГРАТь------------------------------------------------
     
@@ -104,7 +121,7 @@ export component MainWindow inherits Window{
         x: 900px; y:50px;
         width: 60px;
         height: 60px;
-        background: Color.primary;
+        background: Color.background;
         border-radius: 16px;
         clip: true;
 
@@ -127,10 +144,29 @@ export component MainWindow inherits Window{
 //БАР-------------------------------------------------------
     hotbar := Bar{}
 
+//сервер онлафн ----------------------------------------
 
+    Rectangle {
+        x: 100px; y: 50px;
+        width: 160px;
+        height: 60px;
+        background: Color.background;
+        border-radius: 16px;
 
-    
+        Rectangle {
+            x: 0px;
+            width: 60px;
+            height: 60px;
+            Image {
+                source: @image-url("image/users.png");
+                width: 26px;
+                height: 26px;
+            }
+        }
+    }
 }
+
+
 
 
 

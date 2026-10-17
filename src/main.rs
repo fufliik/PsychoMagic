@@ -5,12 +5,16 @@ mod minecraft;
 mod dir;
 mod auth;
 mod update;
+mod server;
+mod mods;
 
 #[tokio::main]
 async fn main() -> Result<(), slint::PlatformError> {
     let ui = gui::App::new();
     eprintln!("start");
 
+
+    //переделать и инфо  в гуи
     match tokio::task::spawn_blocking(|| {
         update::check();
     }).await
