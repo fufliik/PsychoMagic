@@ -26,6 +26,27 @@ async fn main() -> Result<(), slint::PlatformError> {
             println!("Ошибка обновление: {}", e)
         }
     }
+    
+    let ui_weak = ui.ui_weak.clone();
+    tokio::spawn(async move {
+        loop {
+            let status = server::check_online().await;
+
+            let online = match status {
+                Some((online, max)) => {
+                    format!("{online}/{max}")
+                }
+                None => {
+                    "Сервер выключен".to_string()
+                }
+            };
+            gui::App::server_online(ui_weak.clone(), online);
+
+            tokio::time::sleep(
+                std::time::Duration::from_secs(5)
+            ).await;
+        }
+    });
 
     let user = auth::User::load().unwrap_or_default(); // нет файла или битый: пустой ник
     ui.username(&user.username);                       // поле ввода заполнится само

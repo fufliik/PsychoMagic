@@ -108,7 +108,13 @@ impl App {
             }
         });
     }
-
+    pub fn server_online(ui_weak: Weak<MainWindow>, online: String) {
+        let _ =  slint::invoke_from_event_loop( move || {
+            if let Some(ui) = ui_weak.upgrade() {
+                ui.global::<Logic>().set_server_online(online.into());
+            }
+        });
+    }
 
 //global Enabled
 
