@@ -2,6 +2,7 @@ use crate::minecraft;
 use slint::Weak;
 use crate::gui::PlayStatus::Play;
 use crate::auth::User;
+use crate::settings::Settings;
 
 slint::include_modules!();
 pub struct App {
@@ -65,6 +66,10 @@ impl App {
         self.ui.global::<Logic>().set_password(password.into());
     }
     */
+
+    pub fn memory(&self, memory: &i32) {
+        self.ui.global::<Logic>().set_mamory(*memory);
+    }
     pub fn bind_auth(&self) {
         let ui_weak = self.ui.as_weak();
         self.ui.global::<Logic>().on_auth_save(move || {
@@ -74,6 +79,17 @@ impl App {
                 eprintln!("не удалось сохранить: {e}");
             }
         });
+    }
+
+    pub fn bind_settings(&self) {
+        let ui_weak = self.ui.as_weak();
+        self.ui.global::<Logic>().on_settings_save(move || {
+            let Some(ui) = ui_weak.upgrade() else { return };
+            let settings = Settings { memory: ui.global::<Logic>().get_mamory()};
+            if let Err(e) = settings.save() {
+                eprintln!("не удалось сохранить: {e}")
+            }
+        })
     }
 
     //выдод в интерфейс с процент газрузки

@@ -1,7 +1,9 @@
+use std::alloc::System;
 use crate::gui::MainWindow;
 use slint::Weak;
 use crate::gui::App;
 use crate::auth::User;
+use crate::settings::Settings;
 use crate::dir;
 use crate::mods;
 //use lyceris::minecraft::loader::neoforge::NeoForge;
@@ -48,6 +50,8 @@ pub async fn minecraft_run(ui_weak: Weak<MainWindow>) -> Result<(), Box<dyn std:
 
     let dir = dir::launcher()?;
     let data = User::load()?;
+    let settings = Settings::load()?;
+    let convert = settings.memory as u16;
 
     let config = ConfigBuilder::new(
         &dir,
@@ -57,8 +61,7 @@ pub async fn minecraft_run(ui_weak: Weak<MainWindow>) -> Result<(), Box<dyn std:
             uuid: None,
         },
     )
-        .memory(Memory::Gigabyte(12))
-        //.loader(NeoForge("21.1.233".to_string()).into())
+        .memory(Memory::Gigabyte(convert))
 
         .loader(Forge("47.4.10".to_string()).into())
         .custom_args(vec![

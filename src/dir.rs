@@ -7,7 +7,7 @@ pub fn launcher() -> io::Result<PathBuf> {
             io::ErrorKind::NotFound,
             "Local data directory not found",
         ))?;
-    let launcher_dir = data_dir.join(".TeraCraft");
+    let launcher_dir = data_dir.join(".PsychoMagic");
     fs::create_dir_all(&launcher_dir)?;
 
     Ok(launcher_dir)

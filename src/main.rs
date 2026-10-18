@@ -1,4 +1,4 @@
-use crate::gui::PlayStatus::{Play, Update};
+use crate::gui::PlayStatus::Play;
 
 mod gui;
 mod minecraft;
@@ -7,6 +7,7 @@ mod auth;
 mod update;
 mod server;
 mod mods;
+mod settings;
 
 #[tokio::main]
 async fn main() -> Result<(), slint::PlatformError> {
@@ -51,8 +52,12 @@ async fn main() -> Result<(), slint::PlatformError> {
     let user = auth::User::load().unwrap_or_default(); // нет файла или битый: пустой ник
     ui.username(&user.username);                       // поле ввода заполнится само
 
+    let memory = settings::Settings::load().unwrap_or_default();
+    ui.memory(&memory.memory);
+
     gui::App::play_status(ui.ui_weak.clone(), Play, true);
     ui.bind_auth();
+    ui.bind_settings();
 
     ui.minecraft_run();
     ui.run()

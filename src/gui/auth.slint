@@ -95,7 +95,7 @@ export component Auth inherits Rectangle{
             text <=> Logic.username;
             width: max(parent.width, self.preferred-width);
             vertical-alignment: center;
-
+            enabled: Enabled.all_auth_button;
         }
     }
 
@@ -116,11 +116,12 @@ export component Auth inherits Rectangle{
             input-type: password;
             width: max(parent.width, self.preferred-width);
             vertical-alignment: center;
+            enabled: Enabled.all_auth_button;
         }
     }
 
     Rectangle {
-        x:180px;
+        x:parent.width - self.width - 30px;
         y:390px;
         width: 150px;
         height: 40px;
