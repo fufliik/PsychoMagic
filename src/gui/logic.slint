@@ -8,7 +8,7 @@ export global Logic {
     in-out property <string> login_information_output;
     in-out property <string> console_log;
     in-out property <string> progress_bar;
-    in-out property <string> status_bar: "Загрузка файлов игры";
+    in-out property <string> status_bar;
     in-out property <string > server_online;
 
     //callback
@@ -37,6 +37,7 @@ export global Enabled {
     //slint переменные
     in-out property <bool> all_settings_button;
     in-out property <bool> all_auth_button;
+    in-out property <bool> update;
 
     in-out property <bool> hotbar: false; // false
 

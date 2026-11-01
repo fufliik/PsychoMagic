@@ -1,7 +1,9 @@
 import { Button } from "std-widgets.slint";
 import { Auth } from "auth.slint";
 import { Settings } from "settings.slint";
+import { Update } from "update.slint";
 import { Bar } from "bar.slint";
+
 import { Logic, Color, Enabled } from "logic.slint";
 export { Logic, Color, Enabled}
 
@@ -149,6 +151,12 @@ export component MainWindow inherits Window{
 //БАР-------------------------------------------------------
     hotbar := Bar{}
 
+
+
+// update------------------------------------
+    update := Update{}
+
+
 //сервер онлафн ----------------------------------------
 
     Rectangle {
@@ -163,7 +171,7 @@ export component MainWindow inherits Window{
             width: 60px;
             height: 60px;
             Image {
-                source: @image-url("image/users.png");
+                source: @image-url("image/user.png");
                 width: 26px;
                 height: 26px;
             }

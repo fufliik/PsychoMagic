@@ -5,7 +5,7 @@ use crate::gui::App;
 use crate::auth::User;
 use crate::settings::Settings;
 use crate::dir;
-use crate::mods;
+
 //use lyceris::minecraft::loader::neoforge::NeoForge;
 use lyceris::minecraft::config::Memory;
 use lyceris::minecraft::{
@@ -69,7 +69,7 @@ pub async fn minecraft_run(ui_weak: Weak<MainWindow>) -> Result<(), Box<dyn std:
             "188.127.241.231:30775".to_string(),
         ])
         .build();
-
+/*
     match mods::install().await {
         Ok(()) => {
             println!("Моды установлены");
@@ -77,7 +77,7 @@ pub async fn minecraft_run(ui_weak: Weak<MainWindow>) -> Result<(), Box<dyn std:
         Err(err) => {
             println!("Error: {err}");
         }
-    };
+    };*/
 
 
 

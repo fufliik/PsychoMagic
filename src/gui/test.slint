@@ -1,0 +1,17 @@
+import { ListView } from "std-widgets.slint";
+
+export component App inherits Window {
+    in property <[string]> logs;
+
+    public function scroll-to-bottom() {
+        list.viewport-y = min(0px, list.height - list.viewport-height);
+    }
+
+    list := ListView {
+        for line in logs : Text {
+            text: line;
+            font-family: "monospace";
+            wrap: word-wrap;
+        }
+    }
+}

@@ -1,0 +1,17 @@
+import {Logic, Color, Enabled} from "logic.slint";
+
+
+export component Update inherits Rectangle{
+    z: 100;
+    width: 360px;
+    height: 480px;
+    opacity: Enabled.update ? 1.0 : 0.0;
+    animate opacity  { duration: 200ms; easing: ease-in-out;}
+
+    Rectangle {
+        width: 1005px;
+        height: 563px;
+        background: Color.background;
+        opacity: 0.75;
+    }
+}

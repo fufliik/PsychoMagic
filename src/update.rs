@@ -1,11 +1,12 @@
 use self_update::cargo_crate_version;
-
+use std::env;
+use std::process::{Command, exit};
 const REPO_OWNER: &str = "fufliik";
 const REPO_NAME: &str = "Glava_Launcher";
 const BIN_NAME: &str = env!("CARGO_PKG_NAME");
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 
-pub fn check() -> Result<(), Box<dyn std::error::Error>> {
+pub fn check() -> Result<bool, Box<dyn std::error::Error>> {
     let releases = self_update::backends::github::ReleaseList::configure()
         .repo_owner(REPO_OWNER)
         .repo_name(REPO_NAME)
@@ -17,9 +18,11 @@ pub fn check() -> Result<(), Box<dyn std::error::Error>> {
         if let Some(latest) = releases.latest() {
             println!("Найдено новое обновление: {} -> {}", VERSION, latest.version());
         }
-        run()?;
+        //run()?;
+        return Ok(true);
+
     }
-    Ok(())
+    Ok(false)
 }
 
 pub fn run() -> Result<(), Box<dyn std::error::Error>> {
@@ -35,5 +38,21 @@ pub fn run() -> Result<(), Box<dyn std::error::Error>> {
         .build()?
         .update()?;
     println!("Обновлено до {}", status.version());
+    restart_process_app();
     Ok(())
 }
+
+pub fn restart_process_app() {
+    if let Ok(current_exe) = env::current_exe() {
+        let args: Vec<String> = env::args().skip(1).collect();
+        let mut cmd = Command::new(current_exe);
+        cmd.args(&args);
+        if cmd.spawn().is_ok() {
+            exit(0);
+        } else {
+            eprintln!("Не удалось запустить новую копию приложения.");
+        }
+    }
+}
+
+
