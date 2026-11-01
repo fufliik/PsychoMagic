@@ -12,6 +12,10 @@
   <img src="./reference/login.png" width="800">
 </p>
 
+<p align="center">
+  <img src="./reference/settings.png" width="800">
+</p>
+
 ## 🎮 Возможности
 
 - Быстрый запуск Minecraft
