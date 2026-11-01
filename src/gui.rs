@@ -19,11 +19,11 @@ impl PlayStatus{
         match self {
             PlayStatus::Play => (
                 "Играть",
-                slint::Color::from_rgb_u8(35, 134, 54),
+                slint::Color::from_rgb_u8(251, 130, 7),
             ),
             PlayStatus::Starting => (
                 "Запуск..",
-                slint::Color::from_rgb_u8(255, 99, 99),
+                slint::Color::from_rgb_u8(252, 181, 23),
             ),
             PlayStatus::Update => (
                 "Обновить",
@@ -116,6 +116,15 @@ impl App {
             }
         });
     }
+
+    pub fn hotbar_status(ui_weak: Weak<MainWindow>, text: String) {
+        let _ = slint::invoke_from_event_loop(move || {
+            if let Some(ui) = ui_weak.upgrade() {
+                ui.global::<Logic>().set_status_bar(text.into());
+            }
+        });
+
+    }
     pub fn button_play_enabled(ui_weak: Weak<MainWindow>, res: bool) {
         let _ = slint::invoke_from_event_loop(move || {
             if let Some(ui) = ui_weak.upgrade() {
@@ -141,6 +150,17 @@ impl App {
                 ui.global::<Logic>().set_server_online(online.into());
             }
         });
+    }
+
+    pub fn console_enabled(&self) {
+        self.ui.global::<Enabled>().on_console_toggle(|enabled| {
+            if enabled {
+                crate::console::enable();
+            } else {
+                crate::console::disable();
+            }
+        });
+
     }
 
     //global Enabled

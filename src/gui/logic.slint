@@ -9,7 +9,7 @@ export global Logic {
     in-out property <string> console_log;
     in-out property <string> progress_bar;
     in-out property <string> status_bar;
-    in-out property <string > server_online;
+    in-out property <string > server_online: "...";
 
     //callback
     callback play_minecrat_process;
@@ -24,9 +24,9 @@ export global Color {
     //slint переменные
     in-out property <color> background: #151515;
     in-out property <color> black: #0B0A0A;
-    in-out property <color> primary: #008E45;
-    in-out property <color> red: #FF6363;
-    in-out property <color> qwer: #969696;
+    in-out property <color> primary: #fb8207;
+    in-out property <color> red: #773f7d;
+    in-out property <color> qwer: #fcb517;
 }
 
 export global Enabled {
@@ -40,5 +40,10 @@ export global Enabled {
     in-out property <bool> update;
 
     in-out property <bool> hotbar: false; // false
+
+
+
+    in-out property<bool> console_enabled: false;
+    callback console_toggle(bool);
 
 }

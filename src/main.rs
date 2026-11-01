@@ -1,6 +1,6 @@
-use crate::gui::PlayStatus;
 
-
+#![windows_subsystem = "windows"]
+use crate::gui::{Enabled, PlayStatus};
 mod gui;
 mod minecraft;
 mod dir;
@@ -9,11 +9,14 @@ mod update;
 mod server;
 
 mod settings;
+mod console;
 
 #[tokio::main]
 async fn main() -> Result<(), slint::PlatformError> {
     let ui = gui::App::new();
     let ui_weak = ui.ui_weak.clone();
+
+    ui.console_enabled();
 
 
     let update_ui_weak = ui_weak.clone();

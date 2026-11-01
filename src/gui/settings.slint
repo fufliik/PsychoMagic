@@ -44,6 +44,7 @@ export component Settings  inherits Rectangle{
             }
         }
     }
+
     Rectangle {
         z:5;
         Text {
@@ -71,10 +72,6 @@ export component Settings  inherits Rectangle{
 
     }
 
-
-
-
-
     Slider {
         x:414px;
         y: 125px;
@@ -89,6 +86,27 @@ export component Settings  inherits Rectangle{
             Logic.mamory = round(value)
         }
     }
+
+    Rectangle {
+        x:parent.width - self.width - 200px;
+        y:400px;
+        width: 150px;
+        height: 40px;
+        background: Color.red;
+        border-radius: 20px;
+        clip: true;
+
+        Button {
+            text: Enabled.console_enabled ? "Выключить консоль" : "Включить консоль";
+
+            clicked => {
+                Enabled.console_enabled = !Enabled.console_enabled;
+                Enabled.console_toggle(Enabled.console_enabled);
+            }
+        }
+    }
+
+
 
     Rectangle {
         x:parent.width - self.width - 40px;

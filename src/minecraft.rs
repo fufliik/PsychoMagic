@@ -32,6 +32,7 @@ pub async fn minecraft_run(ui_weak: Weak<MainWindow>) -> Result<(), Box<dyn std:
                 let res = format!("{:.1} / 100 %", percent);
                 println!("Downloading {} - {}/{}", path, current, total);
                 let _ = App::emitter_mdp_minecraft(w1.clone(), res);
+                let _ = App::hotbar_status(w1.clone(), "Загрузка файлов игры".to_string());
                 let _ = App::hotbar_enabled(w1.clone(), true);
 
 
